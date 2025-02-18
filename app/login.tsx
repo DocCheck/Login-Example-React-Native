@@ -3,13 +3,7 @@ import { useEffect } from "react";
 import WebView from "react-native-webview";
 import { Button, Linking, Text } from "react-native";
 import { useOAuthContext } from "@/contexts/OAuthContext";
-
-// Client ID needs to be registered with the OAuth provider
-const loginClientId = process.env.EXPO_PUBLIC_LOGIN_CLIENT_ID;
-// Redirect URI needs to be registered with the OAuth provider
-const redirectUri = process.env.EXPO_PUBLIC_LOGIN_REDIRECT_URI;
-// Client Secret needs to be kept secret and should not be exposed to the client
-const loginClientSecret = process.env.EXPO_PUBLIC_LOGIN_CLIENT_SECRET;
+import { loginClientId, redirectUri, loginClientSecret } from "@/configs/client";
 
 // This is a simple HTML template that contains the login button web component
 // The web component will redirect to the OAuth provider's login page which will then return the code to the redirect URI (the app)
@@ -25,7 +19,7 @@ const TEMPLATE = `
     }
 </style>
 <body>
-    <dc-login-button size="small" language="en" loginClientId="${loginClientId}" redirectUri="${redirectUri}" popup></dc-login-button>
+    <dc-login-button size="small" language="en" loginClientId="${loginClientId}" redirectUri="${redirectUri}" popup style="width: 100%"></dc-login-button>
     <script src="https://static.doccheck.com/components/login-button/1.0.2/main.mjs"></script>
 </body>
 `;
@@ -39,10 +33,17 @@ export default function LoginRoute() {
     const { code }: { code: string } = useLocalSearchParams();
 
     const openLoginUrl = () => {
-        if (!loginClientId || !redirectUri) return;
+        if (!loginClientId) return;
         // The app will open the OAuth provider's login page in the browser
         // Since the login page will redirect back to the app, the app will receive the code in the URL
-        Linking.openURL(`https://login.doccheck.com/code/?dc_language=en&dc_client_id=${loginClientId}&dc_template=fullscreen_dc&redirect_uri=${encodeURIComponent(redirectUri)}`);
+        // Redirect URI is optional and only works if the oauth special is booked.
+        const params = new URLSearchParams({
+            dc_language: 'en',
+            dc_client_id: loginClientId,
+            dc_template: 'fullscreen_dc',
+            redirect_uri: redirectUri!,
+        });
+        Linking.openURL(`https://login.doccheck.com/code/?${params.toString()}`);
     }
 
     useEffect(() => {
@@ -55,7 +56,7 @@ export default function LoginRoute() {
     }, [code]);
 
     // If the configuration is missing, the user will see an error message
-    if (!redirectUri || !loginClientId || !loginClientSecret) {
+    if (!loginClientId || !loginClientSecret) {
         return <>
             <Text>Missing configuration</Text>
         </>;

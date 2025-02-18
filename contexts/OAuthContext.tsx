@@ -1,3 +1,4 @@
+import { loginClientId, loginClientSecret, redirectUri } from "@/configs/client";
 import { createContext, useContext, useState } from "react";
 
 export type OAuthContextType = {
@@ -45,9 +46,9 @@ export function OAuthProvider({ children }: { children: React.ReactNode }) {
             // Use the code to exchange it for an access_token
             const params = new URLSearchParams({
                 code,
-                client_id: process.env.EXPO_PUBLIC_LOGIN_CLIENT_ID!,
-                client_secret: process.env.EXPO_PUBLIC_LOGIN_CLIENT_SECRET!, // This should not be exposed to the client
-                redirect_uri: process.env.EXPO_PUBLIC_LOGIN_REDIRECT_URI!,
+                client_id: loginClientId!,
+                client_secret: loginClientSecret!, // This should not be exposed to the client
+                redirect_uri: redirectUri!,
                 grant_type: 'authorization_code',
             });
             const response = await fetch('https://login.doccheck.com/service/oauth/access_token/', {
@@ -66,8 +67,8 @@ export function OAuthProvider({ children }: { children: React.ReactNode }) {
             // Use the refresh_token to get a new access_token
             const params = new URLSearchParams({
                 refresh_token: data.refresh_token,
-                client_id: process.env.EXPO_PUBLIC_LOGIN_CLIENT_ID!,
-                client_secret: process.env.EXPO_PUBLIC_LOGIN_CLIENT_SECRET!,
+                client_id: loginClientId!,
+                client_secret: loginClientSecret!,
                 grant_type: 'refresh_token',
             });
             const response = await fetch('https://login.doccheck.com/service/oauth/access_token/', {

@@ -49,12 +49,11 @@ For iOS the command is the same, just replace `android` with `ios`.
 
 ## Key Notes
 
-The app implements the login button and a native button to retrieve a code from the DocCheck Login OAuth2 API. The code is then used to retrieve the access token which can be used to authenticate the user.
+The app implements the login button as well as a native button to retrieve a code from the DocCheck Login OAuth2 API. Both versions use the same authentication flow and behave the same after opening the login form. The returned authentication code is then used to retrieve the access token which can be used to authenticate the user.
 
-The app uses the app-scheme `doccheck://` to redirect the user back to the app after the login process is completed. To register your bundle id and be able to use the app-scheme you need to contact the DocCheck Login support.
+The app uses the app-scheme `com.doccheck.app://` to redirect the user back to the app after the login process is completed. For single endpoints the target URL can be set in the DocCheck Login portal. For multiple endpoints or a whitelisted scheme please contact the support team.
 
 The OAuth package needs to be booked in the DocCheck Login portal for the oauth process to work.
 
 This example does not include the process of storing the access token securely on the device, this should be done in a real-world application.
-Additionally the app does not handle the refresh token, which is also necessary for a real-world application.
 

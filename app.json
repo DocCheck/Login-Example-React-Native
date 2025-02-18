@@ -4,22 +4,22 @@
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "doccheck",
+    "scheme": "com.doccheck.app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "icon": "./assets/pwa-384x384.png",
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "package": "com.doccheck.myapp",
+      "package": "com.doccheck.app",
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
       "expo-router",
@@ -27,7 +27,8 @@
         "expo-splash-screen",
         {
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#ffffff",
+          "image": "./assets/pwa-384x384.png"
         }
       ]
     ],
