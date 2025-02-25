@@ -22,10 +22,6 @@ npm install
 yarn install
 ```
 
-### Setting up the environment
-
-The app uses .env files to store the environment variables. You can copy the example.env to .env and fill in the necessary values.
-
 ### Android
 
 To run the app on an android device you will need to have the android sdk installed on your machine. You can follow the instructions on the [official website](https://developer.android.com/studio).
@@ -33,6 +29,10 @@ To run the app on an android device you will need to have the android sdk instal
 ### iOS
 
 To run the app on an iOS device you will need to have a mac and Xcode installed on your machine. You can follow the instructions on the [official website](https://developer.apple.com/xcode/).
+
+## Setting up the environment
+
+The app uses .env files to store the environment variables. You can copy the example.env to .env and fill in the necessary values.
 
 ## Running the app
 
