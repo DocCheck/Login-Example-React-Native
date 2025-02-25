@@ -53,7 +53,7 @@ For iOS the command is the same, just replace `android` with `ios`.
 
 ## Key Notes
 
-The app implements the login button as well as a native button to retrieve a code from the DocCheck **[Login endpoint (authorization / login URL](https://docs.doccheck.com/login-implementation/oauth/endpoints/login_endpoint.html)**. Both versions use the same authentication flow and behave the same after opening the login form. The returned authorization code is then used to retrieve the access token which can be used to authorized the user.
+The app implements the login button as well as a native button to retrieve a code from the DocCheck **[Login endpoint (authorization / login URL)](https://docs.doccheck.com/login-implementation/oauth/endpoints/login_endpoint.html)**. Both versions use the same authentication flow and behave the same after opening the login form. The returned authorization code is then used to retrieve the access token which can be used to authorized the user.
  
 The app uses the app-scheme `com.doccheck.app://` to redirect the user back to the app after the login process is completed. For a single landing page the target URL can be set in DocCheck CReaM. For multiple landing pages or a whitelisted scheme please contact the support team.
  
